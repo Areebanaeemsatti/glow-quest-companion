@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   Sparkles, LayoutDashboard, Activity, BookHeart, User, Settings, LogOut, Moon, Sun, Bell, Menu,
+  MessageCircleHeart, Droplets, Dumbbell, Apple, Target, CalendarCheck,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
@@ -14,6 +15,12 @@ import { useEffect, useState } from "react";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/ai-coach", label: "AI Coach", icon: MessageCircleHeart },
+  { to: "/quests", label: "Daily Quests", icon: Target },
+  { to: "/skincare-planner", label: "Skincare Planner", icon: Droplets },
+  { to: "/workout-planner", label: "Workout Planner", icon: Dumbbell },
+  { to: "/nutrition-planner", label: "Nutrition Planner", icon: Apple },
+  { to: "/weekly-review", label: "Weekly Review", icon: CalendarCheck },
   { to: "/progress", label: "Daily Progress", icon: Activity },
   { to: "/journal", label: "Journal", icon: BookHeart },
   { to: "/profile", label: "Profile", icon: User },
