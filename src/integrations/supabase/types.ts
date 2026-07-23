@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          messages: Json
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      daily_glow_quests: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          quests: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string
+          id?: string
+          quests?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          quests?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       daily_progress: {
         Row: {
           created_at: string
@@ -161,6 +215,114 @@ export type Database = {
           weight?: number | null
           workout_experience?: string | null
           workout_preference?: string | null
+        }
+        Relationships: []
+      }
+      saved_nutrition_plans: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_skincare_plans: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_workout_plans: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      weekly_reviews: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+          week_start: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+          week_start: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          week_start?: string
         }
         Relationships: []
       }

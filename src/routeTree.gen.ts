@@ -13,12 +13,19 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedWorkoutPlannerRouteImport } from './routes/_authenticated/workout-planner'
+import { Route as AuthenticatedWeeklyReviewRouteImport } from './routes/_authenticated/weekly-review'
+import { Route as AuthenticatedSkincarePlannerRouteImport } from './routes/_authenticated/skincare-planner'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedQuestsRouteImport } from './routes/_authenticated/quests'
 import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedNutritionPlannerRouteImport } from './routes/_authenticated/nutrition-planner'
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAiCoachRouteImport } from './routes/_authenticated/ai-coach'
 
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
@@ -39,9 +46,37 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedWorkoutPlannerRoute =
+  AuthenticatedWorkoutPlannerRouteImport.update({
+    id: '/workout-planner',
+    path: '/workout-planner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedWeeklyReviewRoute =
+  AuthenticatedWeeklyReviewRouteImport.update({
+    id: '/weekly-review',
+    path: '/weekly-review',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSkincarePlannerRoute =
+  AuthenticatedSkincarePlannerRouteImport.update({
+    id: '/skincare-planner',
+    path: '/skincare-planner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedQuestsRoute = AuthenticatedQuestsRouteImport.update({
+  id: '/quests',
+  path: '/quests',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
@@ -59,6 +94,12 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedNutritionPlannerRoute =
+  AuthenticatedNutritionPlannerRouteImport.update({
+    id: '/nutrition-planner',
+    path: '/nutrition-planner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
   id: '/journal',
   path: '/journal',
@@ -69,28 +110,47 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAiCoachRoute = AuthenticatedAiCoachRouteImport.update({
+  id: '/ai-coach',
+  path: '/ai-coach',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/ai-coach': typeof AuthenticatedAiCoachRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/journal': typeof AuthenticatedJournalRoute
+  '/nutrition-planner': typeof AuthenticatedNutritionPlannerRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
+  '/quests': typeof AuthenticatedQuestsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/skincare-planner': typeof AuthenticatedSkincarePlannerRoute
+  '/weekly-review': typeof AuthenticatedWeeklyReviewRoute
+  '/workout-planner': typeof AuthenticatedWorkoutPlannerRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/ai-coach': typeof AuthenticatedAiCoachRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/journal': typeof AuthenticatedJournalRoute
+  '/nutrition-planner': typeof AuthenticatedNutritionPlannerRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
+  '/quests': typeof AuthenticatedQuestsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/skincare-planner': typeof AuthenticatedSkincarePlannerRoute
+  '/weekly-review': typeof AuthenticatedWeeklyReviewRoute
+  '/workout-planner': typeof AuthenticatedWorkoutPlannerRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,12 +158,19 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/ai-coach': typeof AuthenticatedAiCoachRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
+  '/_authenticated/nutrition-planner': typeof AuthenticatedNutritionPlannerRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/progress': typeof AuthenticatedProgressRoute
+  '/_authenticated/quests': typeof AuthenticatedQuestsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/skincare-planner': typeof AuthenticatedSkincarePlannerRoute
+  '/_authenticated/weekly-review': typeof AuthenticatedWeeklyReviewRoute
+  '/_authenticated/workout-planner': typeof AuthenticatedWorkoutPlannerRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,35 +178,56 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/ai-coach'
     | '/dashboard'
     | '/journal'
+    | '/nutrition-planner'
     | '/onboarding'
     | '/profile'
     | '/progress'
+    | '/quests'
     | '/settings'
+    | '/skincare-planner'
+    | '/weekly-review'
+    | '/workout-planner'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/ai-coach'
     | '/dashboard'
     | '/journal'
+    | '/nutrition-planner'
     | '/onboarding'
     | '/profile'
     | '/progress'
+    | '/quests'
     | '/settings'
+    | '/skincare-planner'
+    | '/weekly-review'
+    | '/workout-planner'
+    | '/api/chat'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/ai-coach'
     | '/_authenticated/dashboard'
     | '/_authenticated/journal'
+    | '/_authenticated/nutrition-planner'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
     | '/_authenticated/progress'
+    | '/_authenticated/quests'
     | '/_authenticated/settings'
+    | '/_authenticated/skincare-planner'
+    | '/_authenticated/weekly-review'
+    | '/_authenticated/workout-planner'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -147,6 +235,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -179,11 +268,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/workout-planner': {
+      id: '/_authenticated/workout-planner'
+      path: '/workout-planner'
+      fullPath: '/workout-planner'
+      preLoaderRoute: typeof AuthenticatedWorkoutPlannerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/weekly-review': {
+      id: '/_authenticated/weekly-review'
+      path: '/weekly-review'
+      fullPath: '/weekly-review'
+      preLoaderRoute: typeof AuthenticatedWeeklyReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skincare-planner': {
+      id: '/_authenticated/skincare-planner'
+      path: '/skincare-planner'
+      fullPath: '/skincare-planner'
+      preLoaderRoute: typeof AuthenticatedSkincarePlannerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/quests': {
+      id: '/_authenticated/quests'
+      path: '/quests'
+      fullPath: '/quests'
+      preLoaderRoute: typeof AuthenticatedQuestsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/progress': {
@@ -207,6 +331,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/nutrition-planner': {
+      id: '/_authenticated/nutrition-planner'
+      path: '/nutrition-planner'
+      fullPath: '/nutrition-planner'
+      preLoaderRoute: typeof AuthenticatedNutritionPlannerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/journal': {
       id: '/_authenticated/journal'
       path: '/journal'
@@ -221,25 +352,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/ai-coach': {
+      id: '/_authenticated/ai-coach'
+      path: '/ai-coach'
+      fullPath: '/ai-coach'
+      preLoaderRoute: typeof AuthenticatedAiCoachRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAiCoachRoute: typeof AuthenticatedAiCoachRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
+  AuthenticatedNutritionPlannerRoute: typeof AuthenticatedNutritionPlannerRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
+  AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedSkincarePlannerRoute: typeof AuthenticatedSkincarePlannerRoute
+  AuthenticatedWeeklyReviewRoute: typeof AuthenticatedWeeklyReviewRoute
+  AuthenticatedWorkoutPlannerRoute: typeof AuthenticatedWorkoutPlannerRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAiCoachRoute: AuthenticatedAiCoachRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
+  AuthenticatedNutritionPlannerRoute: AuthenticatedNutritionPlannerRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProgressRoute: AuthenticatedProgressRoute,
+  AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedSkincarePlannerRoute: AuthenticatedSkincarePlannerRoute,
+  AuthenticatedWeeklyReviewRoute: AuthenticatedWeeklyReviewRoute,
+  AuthenticatedWorkoutPlannerRoute: AuthenticatedWorkoutPlannerRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -250,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
-import { Droplet, Dumbbell, Sparkles, Moon, Flame, BookHeart, ArrowRight } from "lucide-react";
+import { Droplet, Dumbbell, Sparkles, Moon, Flame, BookHeart, ArrowRight, Loader2, MessageCircleHeart, Target, Apple, Droplets } from "lucide-react";
 import { quoteOfTheDay, todayISO } from "@/lib/glow";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import { Button } from "@/components/ui/button";
+import { generateDailyTip } from "@/lib/ai.functions";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
@@ -73,6 +77,17 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
+      <AiTipCard />
+
+      <div className="grid gap-2 sm:grid-cols-4">
+        <QuickLink to="/ai-coach" icon={MessageCircleHeart} label="AI Coach" />
+        <QuickLink to="/quests" icon={Target} label="Daily Quests" />
+        <QuickLink to="/skincare-planner" icon={Droplets} label="Skincare" />
+        <QuickLink to="/workout-planner" icon={Dumbbell} label="Workout" />
+      </div>
+
+
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Metric icon={Droplet} label="Water" value={`${today?.water ?? 0} / ${profile?.water_goal ?? 8}`} sub="glasses today" />
@@ -199,3 +214,48 @@ function GlowRing({ score }: { score: number }) {
     </div>
   );
 }
+
+function AiTipCard() {
+  const run = useServerFn(generateDailyTip);
+  const [tip, setTip] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const load = async () => {
+    setLoading(true);
+    try {
+      const r = (await run()) as { content: string };
+      setTip(r.content);
+    } finally { setLoading(false); }
+  };
+  return (
+    <div className="rounded-3xl border bg-card p-5 shadow-soft">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <div className="grid h-8 w-8 place-items-center rounded-xl bg-glow-gradient shadow-glow">
+            <Sparkles className="h-4 w-4 text-primary-foreground" />
+          </div>
+          <div className="font-display text-lg font-semibold">Today's AI Tip</div>
+        </div>
+        <Button size="sm" variant="ghost" className="rounded-full" onClick={load} disabled={loading}>
+          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (tip ? "Refresh" : "Generate")}
+        </Button>
+      </div>
+      <p className="mt-3 text-sm text-muted-foreground">
+        {tip || "Get a personalized wellness tip generated from your profile and progress."}
+      </p>
+    </div>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function QuickLink({ to, icon: Icon, label }: { to: string; icon: any; label: string }) {
+  return (
+    <Link to={to} className="group flex items-center gap-2 rounded-2xl border bg-card p-3 shadow-soft hover:bg-accent transition">
+      <div className="grid h-9 w-9 place-items-center rounded-xl bg-glow-gradient shadow-glow">
+        <Icon className="h-4 w-4 text-primary-foreground" />
+      </div>
+      <span className="text-sm font-medium">{label}</span>
+      <ArrowRight className="ml-auto h-4 w-4 opacity-0 group-hover:opacity-60 transition" />
+    </Link>
+  );
+}
+
