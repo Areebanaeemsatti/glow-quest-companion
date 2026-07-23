@@ -29,7 +29,7 @@ export function PlanGenerator({ title, icon: Icon, generateFn, savedTable, saved
   const onGenerate = async () => {
     setLoading(true);
     try {
-      const res = (await run({ data: {} })) as { content: string };
+      const res = (await run()) as { content: string };
       setContent(res.content);
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Failed to generate");

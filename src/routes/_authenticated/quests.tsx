@@ -37,7 +37,7 @@ function Quests() {
   const onGenerate = async () => {
     setLoading(true);
     try {
-      const res = (await gen({ data: {} })) as { quests: Quest[] };
+      const res = (await gen()) as { quests: Quest[] };
       setQuests(res.quests);
       toast.success("Quests generated!");
     } catch (e) {

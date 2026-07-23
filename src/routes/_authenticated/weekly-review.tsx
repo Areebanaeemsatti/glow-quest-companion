@@ -39,7 +39,7 @@ function WeeklyReview() {
   const onGenerate = async () => {
     setLoading(true);
     try {
-      const res = (await gen({ data: {} })) as { content: string };
+      const res = (await gen()) as { content: string };
       setContent(res.content);
       toast.success("Weekly review ready!");
     } catch (e) {
