@@ -214,3 +214,48 @@ function GlowRing({ score }: { score: number }) {
     </div>
   );
 }
+
+function AiTipCard() {
+  const run = useServerFn(generateDailyTip);
+  const [tip, setTip] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const load = async () => {
+    setLoading(true);
+    try {
+      const r = (await run()) as { content: string };
+      setTip(r.content);
+    } finally { setLoading(false); }
+  };
+  return (
+    <div className="rounded-3xl border bg-card p-5 shadow-soft">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <div className="grid h-8 w-8 place-items-center rounded-xl bg-glow-gradient shadow-glow">
+            <Sparkles className="h-4 w-4 text-primary-foreground" />
+          </div>
+          <div className="font-display text-lg font-semibold">Today's AI Tip</div>
+        </div>
+        <Button size="sm" variant="ghost" className="rounded-full" onClick={load} disabled={loading}>
+          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (tip ? "Refresh" : "Generate")}
+        </Button>
+      </div>
+      <p className="mt-3 text-sm text-muted-foreground">
+        {tip || "Get a personalized wellness tip generated from your profile and progress."}
+      </p>
+    </div>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function QuickLink({ to, icon: Icon, label }: { to: string; icon: any; label: string }) {
+  return (
+    <Link to={to} className="group flex items-center gap-2 rounded-2xl border bg-card p-3 shadow-soft hover:bg-accent transition">
+      <div className="grid h-9 w-9 place-items-center rounded-xl bg-glow-gradient shadow-glow">
+        <Icon className="h-4 w-4 text-primary-foreground" />
+      </div>
+      <span className="text-sm font-medium">{label}</span>
+      <ArrowRight className="ml-auto h-4 w-4 opacity-0 group-hover:opacity-60 transition" />
+    </Link>
+  );
+}
+}
