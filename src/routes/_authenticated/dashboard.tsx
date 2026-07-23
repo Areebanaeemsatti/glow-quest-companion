@@ -258,4 +258,4 @@ function QuickLink({ to, icon: Icon, label }: { to: string; icon: any; label: st
     </Link>
   );
 }
-}
+
