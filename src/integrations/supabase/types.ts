@@ -14,7 +14,156 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      daily_progress: {
+        Row: {
+          created_at: string
+          current_streak: number
+          date: string
+          glow_score: number
+          id: string
+          skincare_completed: boolean
+          sleep_hours: number
+          updated_at: string
+          user_id: string
+          water: number
+          workout_completed: boolean
+        }
+        Insert: {
+          created_at?: string
+          current_streak?: number
+          date?: string
+          glow_score?: number
+          id?: string
+          skincare_completed?: boolean
+          sleep_hours?: number
+          updated_at?: string
+          user_id: string
+          water?: number
+          workout_completed?: boolean
+        }
+        Update: {
+          created_at?: string
+          current_streak?: number
+          date?: string
+          glow_score?: number
+          id?: string
+          skincare_completed?: boolean
+          sleep_hours?: number
+          updated_at?: string
+          user_id?: string
+          water?: number
+          workout_completed?: boolean
+        }
+        Relationships: []
+      }
+      journal: {
+        Row: {
+          created_at: string
+          date: string
+          energy: number | null
+          id: string
+          mood: string | null
+          notes: string | null
+          skin_condition: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string
+          energy?: number | null
+          id?: string
+          mood?: string | null
+          notes?: string | null
+          skin_condition?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          energy?: number | null
+          id?: string
+          mood?: string | null
+          notes?: string | null
+          skin_condition?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          age: number | null
+          budget: string | null
+          created_at: string
+          daily_time: string | null
+          email: string | null
+          fitness_goal: string | null
+          full_name: string | null
+          gender: string | null
+          height: number | null
+          id: string
+          meals_per_day: number | null
+          onboarding_completed: boolean
+          skin_concerns: string[] | null
+          skin_type: string | null
+          sleep_hours: number | null
+          updated_at: string
+          user_id: string
+          water_goal: number | null
+          weight: number | null
+          workout_experience: string | null
+          workout_preference: string | null
+        }
+        Insert: {
+          age?: number | null
+          budget?: string | null
+          created_at?: string
+          daily_time?: string | null
+          email?: string | null
+          fitness_goal?: string | null
+          full_name?: string | null
+          gender?: string | null
+          height?: number | null
+          id?: string
+          meals_per_day?: number | null
+          onboarding_completed?: boolean
+          skin_concerns?: string[] | null
+          skin_type?: string | null
+          sleep_hours?: number | null
+          updated_at?: string
+          user_id: string
+          water_goal?: number | null
+          weight?: number | null
+          workout_experience?: string | null
+          workout_preference?: string | null
+        }
+        Update: {
+          age?: number | null
+          budget?: string | null
+          created_at?: string
+          daily_time?: string | null
+          email?: string | null
+          fitness_goal?: string | null
+          full_name?: string | null
+          gender?: string | null
+          height?: number | null
+          id?: string
+          meals_per_day?: number | null
+          onboarding_completed?: boolean
+          skin_concerns?: string[] | null
+          skin_type?: string | null
+          sleep_hours?: number | null
+          updated_at?: string
+          user_id?: string
+          water_goal?: number | null
+          weight?: number | null
+          workout_experience?: string | null
+          workout_preference?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
