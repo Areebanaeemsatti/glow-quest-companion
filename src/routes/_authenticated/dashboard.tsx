@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
-import { Droplet, Dumbbell, Sparkles, Moon, Flame, BookHeart, ArrowRight } from "lucide-react";
+import { Droplet, Dumbbell, Sparkles, Moon, Flame, BookHeart, ArrowRight, Loader2, MessageCircleHeart, Target, Apple, Droplets } from "lucide-react";
 import { quoteOfTheDay, todayISO } from "@/lib/glow";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import { Button } from "@/components/ui/button";
+import { generateDailyTip } from "@/lib/ai.functions";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
@@ -73,6 +77,17 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
+      <AiTipCard />
+
+      <div className="grid gap-2 sm:grid-cols-4">
+        <QuickLink to="/ai-coach" icon={MessageCircleHeart} label="AI Coach" />
+        <QuickLink to="/quests" icon={Target} label="Daily Quests" />
+        <QuickLink to="/skincare-planner" icon={Droplets} label="Skincare" />
+        <QuickLink to="/workout-planner" icon={Dumbbell} label="Workout" />
+      </div>
+
+
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Metric icon={Droplet} label="Water" value={`${today?.water ?? 0} / ${profile?.water_goal ?? 8}`} sub="glasses today" />
