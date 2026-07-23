@@ -39,10 +39,17 @@ function ProfilePage() {
 
   const save = useMutation({
     mutationFn: async () => {
+      const f = form as Record<string, string | number | null | undefined>;
       const { error } = await supabase.from("profiles").update({
-        full_name: form.full_name, height: form.height, weight: form.weight,
-        fitness_goal: form.fitness_goal, skin_type: form.skin_type, budget: form.budget,
-        workout_preference: form.workout_preference, water_goal: form.water_goal, sleep_hours: form.sleep_hours,
+        full_name: (f.full_name as string) ?? null,
+        height: (f.height as number) ?? null,
+        weight: (f.weight as number) ?? null,
+        fitness_goal: (f.fitness_goal as string) ?? null,
+        skin_type: (f.skin_type as string) ?? null,
+        budget: (f.budget as string) ?? null,
+        workout_preference: (f.workout_preference as string) ?? null,
+        water_goal: (f.water_goal as number) ?? 8,
+        sleep_hours: (f.sleep_hours as number) ?? 8,
       }).eq("user_id", uid);
       if (error) throw error;
     },
