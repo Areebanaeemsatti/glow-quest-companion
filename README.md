@@ -175,20 +175,21 @@ bun run build
 
 Framework detection is automatic.
 
-## Screenshots
+### Screenshots
 
-Add screenshots of:
+### Landing Page
 
-- Landing Page
-- Dashboard
-- AI Coach
-- Weekly Review
+![Landing Page](docs/landing-page.png)
 
-Place them inside:
+### Dashboard
 
-```
-docs/screenshots/
-```
+![Dashboard](docs/dashboard.png)
+
+### AI Coach
+
+![AI Coach](docs/ai-coach.png)
+
+
 
 ## Future Improvements
 
