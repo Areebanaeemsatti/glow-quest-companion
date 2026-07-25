@@ -1,5 +1,9 @@
 # 🌸 GlowQuest AI
 
+## Live Demo
+
+🌐 **Try GlowQuest AI:** https://glow-quest-companion.vercel.app/
+
 > Your personal AI-powered wellness and glow-up coach — skincare, fitness, nutrition, sleep and healthy habits, all in one beautiful app.
 
 ![Made with TanStack Start](https://img.shields.io/badge/TanStack-Start-6B4EFF)
