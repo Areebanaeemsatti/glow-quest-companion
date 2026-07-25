@@ -10,128 +10,198 @@
 
 ---
 
-## ✨ Tagline
+## Tagline
+
 *Track your habits. Talk to your coach. Watch yourself glow.*
 
-## 🎯 Problem
+## Problem
+
 Most wellness apps are either siloed (only skincare, only workouts) or overwhelming (generic content that ignores who you actually are). People give up because plans don't fit their skin, budget, time, or lifestyle.
 
-## 💡 Solution
+## Solution
+
 **GlowQuest AI** combines a delightful habit tracker with a specialized AI coach that is *only* trained to talk about wellness — using your real onboarding data (goals, skin type, experience, available time, budget) to generate genuinely personalized plans, quests and reviews.
 
 ---
 
-## 🌟 Features
-- 🔐 **Full authentication** — sign up, sign in, forgot & reset password (Supabase Auth)
-- 🧭 **6-step onboarding** — personal info, fitness goal, skin concerns, lifestyle, budget & time
-- 📊 **Premium dashboard** — animated Glow Ring, weekly Recharts, streaks, AI tip of the day
-- 💧 **Daily progress tracker** — water, workout, skincare, sleep with instant Glow Score recompute
-- 📓 **Journal** — full CRUD entries with mood, energy and notes
-- 🌗 **Dark mode**, glassmorphism, feminine design system
-- 📱 **Responsive** mobile-first layout with sidebar + sheet nav
+## Features
 
-## 🤖 AI Features (Google Gemini via Lovable AI Gateway)
-- 💬 **AI Coach** — streaming chat, stays strictly in-character as a wellness coach
-- 🧴 **Skincare Planner** — routines tailored to skin type, concerns & budget
-- 🏋️ **Workout Planner** — weekly plan matched to experience & available time
-- 🥗 **Nutrition Planner** — realistic meal plans respecting budget & goals
-- 🎯 **Daily Glow Quests** — personalized XP-earning micro-tasks
-- 📅 **Weekly Review** — narrative summary of your progress + next-week focus
-- 📝 **Journal Insights** — gentle patterns from your recent entries
+- Full authentication — sign up, sign in, forgot & reset password (Supabase Auth)
+- 6-step onboarding — personal info, fitness goal, skin concerns, lifestyle, budget & time
+- Premium dashboard — animated Glow Ring, weekly Recharts, streaks, AI tip of the day
+- Daily progress tracker — water, workout, skincare, sleep with instant Glow Score recompute
+- Journal — full CRUD entries with mood, energy and notes
+- Dark mode, glassmorphism, feminine design system
+- Responsive mobile-first layout with sidebar + sheet navigation
 
-## 🏗️ Architecture
+## AI Features
+
+(Google Gemini via Lovable AI Gateway)
+
+- AI Coach — streaming chat that stays strictly in-character as a wellness coach
+- Skincare Planner — routines tailored to skin type, concerns and budget
+- Workout Planner — weekly plans matched to experience and available time
+- Nutrition Planner — realistic meal plans based on budget and goals
+- Daily Glow Quests — personalized XP-earning micro-tasks
+- Weekly Review — narrative summary of progress with next-week focus
+- Journal Insights — gentle patterns discovered from recent journal entries
+
+## Architecture
+
 - **TanStack Start (React 19 + Vite 7)** — SSR, file-based routing, server functions
-- **Supabase** — Postgres + Auth + RLS
-- **Lovable AI Gateway** — Google Gemini access without exposing keys
-- **shadcn/ui + Tailwind v4** — accessible primitives, design tokens in `src/styles.css`
-- **Server functions** for one-shot AI generation; **server route** for streaming chat
+- **Supabase** — Postgres, Authentication and Row-Level Security
+- **Lovable AI Gateway** — Google Gemini access without exposing API keys
+- **shadcn/ui + Tailwind CSS v4** — accessible UI components and design tokens
+- **Server Functions** for AI generation
+- **Streaming API Route** for real-time AI chat
 
-## 📁 Folder Structure
-```
+## Folder Structure
+
+```text
 src/
-├── components/           # shadcn UI + shared (app-shell, plan-generator, markdown-view)
-├── hooks/                # use-auth, use-theme, use-mobile
-├── integrations/supabase # generated client + auth helpers (do not edit)
-├── lib/                  # ai.server.ts, ai.functions.ts, glow score, utils
+├── components/           # shadcn UI + shared components
+├── hooks/                # Custom React hooks
+├── integrations/supabase # Generated Supabase client
+├── lib/                  # AI, utilities, glow score logic
 ├── routes/
 │   ├── __root.tsx
-│   ├── index.tsx         # marketing landing
-│   ├── auth.tsx / reset-password.tsx
-│   ├── _authenticated/   # protected app: dashboard, onboarding, journal,
-│   │                     # progress, quests, ai-coach, *-planner, weekly-review
-│   └── api/chat.ts       # streaming AI chat endpoint
-└── styles.css            # design tokens (OKLCH), glass utilities
-supabase/                 # config
+│   ├── index.tsx
+│   ├── auth.tsx
+│   ├── reset-password.tsx
+│   ├── _authenticated/
+│   └── api/chat.ts
+└── styles.css
+
+supabase/
 ```
 
-## 🧰 Tech Stack
-TanStack Start · React 19 · TypeScript (strict) · Tailwind CSS v4 · shadcn/ui · Supabase (Postgres, Auth, RLS) · Google Gemini via Lovable AI Gateway · React Hook Form · Zod · Recharts · Lucide · Sonner · react-markdown
+## Tech Stack
 
-## 🗄️ Supabase Setup
-Tables (all with Row-Level Security scoped to `auth.uid()`):
-- `profiles` — onboarding data & goals (auto-created via `handle_new_user` trigger)
-- `daily_progress` — water/workout/skincare/sleep + computed `glow_score` & `current_streak`
-- `journal` — mood, energy, notes
-- `ai_conversations` — chat history
-- `saved_skincare_plans` / `saved_workout_plans` / `saved_nutrition_plans`
-- `daily_glow_quests` — personalized XP tasks
+- TanStack Start
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui
+- Supabase (Postgres, Authentication, RLS)
+- Google Gemini via Lovable AI Gateway
+- React Hook Form
+- Zod
+- Recharts
+- Lucide React
+- Sonner
+- react-markdown
+
+## Supabase Setup
+
+Tables (all protected with Row-Level Security using `auth.uid()`):
+
+- `profiles`
+- `daily_progress`
+- `journal`
+- `ai_conversations`
+- `saved_skincare_plans`
+- `saved_workout_plans`
+- `saved_nutrition_plans`
+- `daily_glow_quests`
 - `weekly_reviews`
 
-Every public table has explicit `GRANT`s and RLS policies. `updated_at` is maintained by a shared `set_updated_at()` trigger.
+Each public table includes appropriate RLS policies, permissions and automatic `updated_at` triggers.
 
-## 🔑 Gemini Setup
-GlowQuest AI calls Google Gemini through the **Lovable AI Gateway**, so you don't manage a raw Google API key. The gateway key `LOVABLE_API_KEY` is injected server-side. If self-hosting, replace the gateway call in `src/lib/ai.server.ts` with a direct `@google/generative-ai` client and set `GEMINI_API_KEY`.
+## Gemini Setup
 
-## 🔐 Environment Variables
-Server-only (never expose to the client):
-```
-LOVABLE_API_KEY=…              # AI Gateway (or GEMINI_API_KEY if self-hosted)
-SUPABASE_URL=…
-SUPABASE_PUBLISHABLE_KEY=…
-SUPABASE_SERVICE_ROLE_KEY=…    # admin/webhook paths only
-```
-Client-safe (Vite):
-```
-VITE_SUPABASE_URL=…
-VITE_SUPABASE_PUBLISHABLE_KEY=…
-VITE_SUPABASE_PROJECT_ID=…
+GlowQuest AI accesses Google Gemini through the **Lovable AI Gateway**, so you don't need to manage a Google API key directly.
+
+If self-hosting, replace the gateway implementation in `src/lib/ai.server.ts` with the official `@google/generative-ai` SDK and configure `GEMINI_API_KEY`.
+
+## Environment Variables
+
+### Server
+
+```env
+LOVABLE_API_KEY=...
+SUPABASE_URL=...
+SUPABASE_PUBLISHABLE_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
-## 🚀 Installation
+### Client
+
+```env
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_PUBLISHABLE_KEY=...
+VITE_SUPABASE_PROJECT_ID=...
+```
+
+## Installation
+
 ```bash
-git clone <your-repo-url>
+git clone <your-repository>
 cd glowquest-ai
-bun install    # or: npm install
+bun install
 ```
 
-## 🧪 Running Locally
+or
+
 ```bash
-bun run dev    # http://localhost:8080
+npm install
 ```
 
-## ☁️ Deployment
-Standard TanStack Start build — deploys to any edge/serverless host.
+## Running Locally
 
-**One-click Vercel:**
-1. Push to GitHub.
-2. Import the repo in Vercel.
-3. Set the environment variables above.
-4. Build command: `bun run build` (framework preset auto-detected).
+```bash
+bun run dev
+```
 
-Also runs on Cloudflare Workers (default target) and Netlify.
+Application runs at:
 
-## 🖼️ Screenshots
-> Add screenshots of the landing page, dashboard glow ring, AI coach chat, and weekly review to `/docs/screenshots/`.
+```
+http://localhost:8080
+```
 
-## 🔮 Future Improvements
+## Deployment
+
+Deploy to Vercel, Netlify or Cloudflare Workers.
+
+### Vercel
+
+1. Push the repository to GitHub.
+2. Import the repository into Vercel.
+3. Add the required environment variables.
+4. Build command:
+
+```bash
+bun run build
+```
+
+Framework detection is automatic.
+
+## Screenshots
+
+Add screenshots of:
+
+- Landing Page
+- Dashboard
+- AI Coach
+- Weekly Review
+
+Place them inside:
+
+```
+docs/screenshots/
+```
+
+## Future Improvements
+
 - Push notifications for daily quests
-- Apple Health / Google Fit sync
-- Community challenges & friend streaks
-- Photo-based skin progress tracking
+- Apple Health & Google Fit integration
+- Community challenges
+- Skin progress photo tracking
 - Multi-language support
 
-## 📄 License
-MIT — free to use, modify and share.
+## License
 
-## 👩‍💻 Author
-Built with 💜 using [Lovable](https://lovable.dev).
+MIT License
+
+## Author
+
+Built with love.
