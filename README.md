@@ -160,7 +160,7 @@ http://localhost:8080
 
 ## Deployment
 
-Deploy to Vercel, Netlify or Cloudflare Workers.
+Deployed to vercel.
 
 ### Vercel
 
