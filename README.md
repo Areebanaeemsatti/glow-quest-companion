@@ -438,27 +438,19 @@ bun run build
 
 ## Landing Page
 
-```
-docs/landing-page.png
-```
+![Landing Page](docs/landing-page.png)
 
 ---
 
 ## Dashboard
 
-```
-docs/dashboard.png
-```
+![Dashboard](docs/dashboard.png)
 
 ---
 
 ## AI Coach
 
-```
-docs/ai-coach.png
-```
-
----
+![AI Coach](docs/ai-coach.png)
 
 # 🌱 Future Roadmap
 
