@@ -139,7 +139,7 @@ VITE_SUPABASE_PROJECT_ID=...
 ## Installation
 
 ```bash
-git clone <your-repository>
+git clone <https://github.com/Areebanaeemsatti/glow-quest-companion>
 cd glowquest-ai
 bun install
 ```
